@@ -23,8 +23,12 @@ def load_model(model_name, eight_bit=0, device_map="auto"):
     gpu_count = torch.cuda.device_count()
     print('gpu_count', gpu_count)
 
-    tokenizer = transformers.LLaMATokenizer.from_pretrained(model_name)
-    model = transformers.LLaMAForCausalLM.from_pretrained(
+    assert (
+        "LlamaTokenizer" in transformers._import_structure["models.llama"]
+    ), "LLaMA is now in HuggingFace's main branch.\nPlease reinstall it: pip uninstall transformers && pip install git+https://github.com/huggingface/transformers.git"
+    from transformers import LlamaTokenizer, LlamaForCausalLM, GenerationConfig
+    tokenizer = LlamaTokenizer.from_pretrained(model_name)
+    model = LlamaForCausalLM.from_pretrained(
         model_name,
         #device_map=device_map,
         #device_map="auto",

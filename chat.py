@@ -31,14 +31,14 @@ def load_model(model_name, eight_bit=0, device_map="auto"):
         torch_dtype=torch.float16,
         #max_memory = {0: "14GB", 1: "14GB", 2: "14GB", 3: "14GB",4: "14GB",5: "14GB",6: "14GB",7: "14GB"},
         #load_in_8bit=eight_bit,
-        low_cpu_mem_usage=True,
+        low_cpu_mem_usage=False,
         load_in_8bit=False,
         cache_dir="cache"
     ).cuda()
 
     generator = model.generate
 
-load_model("./results")
+load_model("../datasets/point-alpaca")
 
 history = []
 
